@@ -19,10 +19,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = scene
-        let comicView = AssemblyBuilder.createComicModule()
-        let nav = UINavigationController(rootViewController: comicView)
-        nav.navigationBar.isHidden = true
-        window?.rootViewController = nav
+        let navigationController = UINavigationController()
+        let assemblyBuilder = AssemblyBuilder()
+        let router = Router(navigationController: navigationController, assemblyBuilder: assemblyBuilder)
+        router.initialViewController()
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         
     }

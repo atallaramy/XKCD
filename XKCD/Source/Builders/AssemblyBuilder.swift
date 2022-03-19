@@ -8,23 +8,23 @@
 import UIKit
 
 protocol AssemblyBuilderProtocol {
-    static func createComicModule() -> UIViewController
-    static func createDetialModule(comic: Comic?, explaination: String) -> UIViewController
+    func createComicModule(router: RouterProtocol) -> UIViewController
+    func createDetialModule(comic: Comic?, explaination: String, router: RouterProtocol) -> UIViewController
 }
 
 class AssemblyBuilder: AssemblyBuilderProtocol {
-    static func createComicModule() -> UIViewController {
+    func createComicModule(router: RouterProtocol) -> UIViewController {
         let view = ViewController()
         let networkService = NetworkManager()
-        let presenter = ComicPresenter(view: view, networkService: networkService)
+        let presenter = ComicPresenter(view: view, networkService: networkService, router: router)
         view.presenter = presenter
         return view
     }
     
-    static func createDetialModule(comic: Comic?, explaination: String) -> UIViewController {
+    func createDetialModule(comic: Comic?, explaination: String, router: RouterProtocol) -> UIViewController {
         let view = DetailViewController()
         let networkService = NetworkManager()
-        let presenter = DetailPresenter(view: view, networkService: networkService, comic: comic, explaination: explaination)
+        let presenter = DetailPresenter(view: view, networkService: networkService, router: router, comic: comic, explaination: explaination)
         view.presenter = presenter
         return view
     }

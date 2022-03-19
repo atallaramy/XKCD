@@ -14,34 +14,44 @@ protocol ComicViewProtocol: AnyObject {
 }
 
 protocol ComicPresenterProtocol: AnyObject {
-    init(view: ComicViewProtocol, networkService: NetworkServiceProtocol)
+    init(view: ComicViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
     func fetchCurrentWithExplaination()
     func fetchComicAndExplaination(of comicNum: Int)
-    var comic: Comic? { get set }
-    var explaination:String? { get set }
     func fetchRandomComic()
     func fetchNextComic()
     func fetchPreviousComic()
     func fetchOldestComic()
     func fetchNewestComic()
+    func comicTapped(comic: Comic, explaination: String)
+    var comic: Comic? { get set }
+    var explaination:String? { get set }
+   
 }
 
 class ComicPresenter: ComicPresenterProtocol {
+    
     
     var comic: Comic?
     var explaination: String?
     var currentComicNum: Int!
     var maxComicNum: Int!
+    
     var navigationBar = ComicNavigationBar()
     
     weak var view: ComicViewProtocol?
+    var router: RouterProtocol?
     var networkService: NetworkServiceProtocol!
     
     
-    required init(view: ComicViewProtocol, networkService: NetworkServiceProtocol) {
+    required init(view: ComicViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol) {
         self.view = view
         self.networkService = networkService
+        self.router = router
         fetchCurrentWithExplaination()
+    }
+    
+    func comicTapped(comic: Comic, explaination: String) {
+        router?.showDetail(comic: comic, explaination: explaination)
     }
     
     public func fetchCurrentWithExplaination() {

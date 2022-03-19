@@ -85,12 +85,10 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let comic = presenter.comic
-        let explaination = presenter.explaination ?? ""
+        guard let comic = presenter.comic else { return }
+        let explaination = presenter.explaination ?? "No explaination implemented, help us to edit it"
         print("DEBUG: \(explaination)")
-        let detailViewController = AssemblyBuilder.createDetialModule(comic: comic, explaination: explaination)
-        navigationController?.present(detailViewController, animated: true, completion: nil)
-        
+        presenter.comicTapped(comic: comic, explaination: explaination)
     }
 }
 
