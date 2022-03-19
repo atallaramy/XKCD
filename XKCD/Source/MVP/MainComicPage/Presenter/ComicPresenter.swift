@@ -88,7 +88,7 @@ class ComicPresenter: ComicPresenterProtocol {
     }
     
     private func fetchComic(_ num: Int, completion: @escaping (_ comic: Comic) -> Void) {
-        networkService.fetchComid(id: num) {[weak self] result in
+        networkService.fetchComic(id: num) {[weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 switch result{

@@ -29,6 +29,7 @@ class Router: RouterProtocol {
 
     func initialViewController() {
         if let navigationController = navigationController {
+            navigationController.isNavigationBarHidden = true
             guard let mainViewController = assemblyBuilder?.createComicModule(router: self) else { return }
             navigationController.viewControllers = [mainViewController]
         }
@@ -36,6 +37,7 @@ class Router: RouterProtocol {
     
     func showDetail(comic: Comic, explaination: String) {
         if let navigationController = navigationController {
+            navigationController.isNavigationBarHidden = true
             guard let detailViewController = assemblyBuilder?.createDetialModule(comic: comic, explaination: explaination, router: self) else { return }
             navigationController.present(detailViewController, animated: true, completion: nil)
         }

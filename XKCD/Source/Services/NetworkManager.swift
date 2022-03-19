@@ -9,7 +9,7 @@ import Foundation
 
 protocol NetworkServiceProtocol {
     func fetchCurrent(completion: @escaping (Result<Comic, XkcdError>) -> Void)
-    func fetchComid(id: Int, completion: @escaping (Result<Comic, XkcdError>) -> Void)
+    func fetchComic(id: Int, completion: @escaping (Result<Comic, XkcdError>) -> Void)
     func fetchComicExplaination(comic: Comic, completion: @escaping (Result<Explaination, XkcdError>) -> Void)
 }
 
@@ -26,7 +26,7 @@ class NetworkManager: NetworkServiceProtocol {
     }
     
     ///Fetch Comic
-    func fetchComid(id: Int, completion: @escaping (Result<Comic, XkcdError>) -> Void) {
+    func fetchComic(id: Int, completion: @escaping (Result<Comic, XkcdError>) -> Void) {
         let urlString = "\(API.baseURL)/\(id)\(API.URLFormat)"
         self.loadURLAndDecode(urlString: urlString, completion: completion)
     }

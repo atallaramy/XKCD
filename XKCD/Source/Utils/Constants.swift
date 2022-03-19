@@ -16,6 +16,12 @@ enum API {
 }
 
 enum XkcdError: Error, CustomNSError {
+    init(rawValue: String) {
+        switch rawValue {
+        case "testFail": self = .apiError
+        default: self = .apiError
+        }
+    }
     case apiError
     case invalidEndPoint
     case invalidResponse

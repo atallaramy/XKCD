@@ -87,7 +87,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let comic = presenter.comic else { return }
         let explaination = presenter.explaination ?? "No explaination implemented, help us to edit it"
-        print("DEBUG: \(explaination)")
         presenter.comicTapped(comic: comic, explaination: explaination)
     }
 }
