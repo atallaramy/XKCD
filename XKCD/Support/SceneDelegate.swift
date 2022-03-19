@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = scene
-        let comicView = ComicModuleBuilder.createComicModule()
+        let comicView = AssemblyBuilder.createComicModule()
         let nav = UINavigationController(rootViewController: comicView)
         nav.navigationBar.isHidden = true
         window?.rootViewController = nav

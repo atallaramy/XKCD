@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class NavigationButton: UIButton {
+final class ComicNavigationButton: UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,9 +27,9 @@ final class NavigationButton: UIButton {
     private func configure() {
         tintColor = .white
         setTitleColor(.white, for: .normal)
-        titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         contentHorizontalAlignment = .center
-        backgroundColor = .systemGray3
+        backgroundColor = .systemGray
         anchor(height: 44)
         layer.cornerRadius = 4
         clipsToBounds = true

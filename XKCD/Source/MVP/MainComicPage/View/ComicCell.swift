@@ -43,7 +43,7 @@ class ComicCell: UICollectionViewCell {
     //MARK: Helpers
     private func configure() {
         guard let url = comic?.image else { return }
-        imageVw.loadResizeAndCache(url: url)
+        imageVw.loadResizeAndCache(url: url, targetWidth: UIScreen.main.bounds.width)
         titleLabel.text = comic?.title
     }
     

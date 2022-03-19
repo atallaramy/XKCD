@@ -17,11 +17,12 @@ class ViewController: UIViewController {
         cv.register(ComicCell.self, forCellWithReuseIdentifier: ComicCell.reuseID)
         return cv
     }()
-    var navigationBar = NavigationBar()
+    var navigationBar = ComicNavigationBar()
     
     //MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationBar.delegate = self
         configureUI()
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -32,11 +33,9 @@ class ViewController: UIViewController {
     private func configureUI() {
         view.addSubview(collectionView)
         collectionView.backgroundColor = .gray
-        collectionView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: UIScreen.main.bounds.height * 0.8)
-        collectionView.centerX(inView: view)
+        collectionView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor)
         view.addSubview(navigationBar)
-        navigationBar.backgroundColor = .red
-        navigationBar.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor , right: view.rightAnchor, paddingLeft: 16, paddingBottom: 16, paddingRight: 16)
+        navigationBar.anchor(top: collectionView.bottomAnchor, left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor , right: view.rightAnchor, paddingTop: 10, height: 44)
     }
     
     private func layout() -> UICollectionViewCompositionalLayout {
@@ -64,7 +63,7 @@ extension ViewController: ComicViewProtocol {
     }
     
     func failure(err: XkcdError) {
-        print("DEBUG: error implementation required")
+        print("DEBUG: error implementation required \(err)")
     }
 }
 
@@ -84,4 +83,37 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: view.frame.height)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let comic = presenter.comic
+        let explaination = presenter.explaination ?? ""
+        print("DEBUG: \(explaination)")
+        let detailViewController = AssemblyBuilder.createDetialModule(comic: comic, explaination: explaination)
+        navigationController?.present(detailViewController, animated: true, completion: nil)
+        
+    }
 }
+
+extension ViewController: NavigationBarDelegate {
+    func fetchRandomComic() {
+        presenter.fetchRandomComic()
+    }
+    
+    func fetchNextComic() {
+        presenter.fetchNextComic()
+    }
+    
+    func fetchPreviousComic() {
+        presenter.fetchPreviousComic()
+    }
+    
+    func fetchOldestComic() {
+        presenter.fetchOldestComic()
+    }
+    
+    func fetchNewestComic() {
+        presenter.fetchNewestComic()
+    }
+}
+
+
