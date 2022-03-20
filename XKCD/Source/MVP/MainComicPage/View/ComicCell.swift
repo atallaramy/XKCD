@@ -8,16 +8,16 @@
 import UIKit
 
 class ComicCell: UICollectionViewCell {
-
+    
     //MARK: Properties
     
     lazy var imageVw: UIImageView = {
-      let imageView = UIImageView()
+        let imageView = UIImageView()
         return imageView
     }()
     
     var titleLabel: UILabel = {
-      var titleLabel = UILabel()
+        var titleLabel = UILabel()
         titleLabel.textAlignment = .center
         titleLabel.backgroundColor = .systemGray3
         titleLabel.font = UIFont.systemFont(ofSize: 25, weight: .bold)

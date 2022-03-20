@@ -8,7 +8,7 @@
 import UIKit
 
 class DetailLabel: UILabel {
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -30,8 +30,6 @@ class DetailLabel: UILabel {
     fileprivate func configure() {
         layer.cornerRadius = 8
         clipsToBounds = true
-        textAlignment = .center
         numberOfLines = 0
     }
-    
 }

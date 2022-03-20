@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreVideo
 
 enum API {
     static let currentURL = "https://xkcd.com/info.0.json"
@@ -60,5 +61,14 @@ enum Alerts {
         case .oldestComic: return "This is the first comic already"
         }
     }
+}
+
+enum K {
+    case explainationNil
     
+    var message: String {
+        switch self {
+        case .explainationNil: return "No explaination implemented, help us to edit it"
+        }
+    }
 }

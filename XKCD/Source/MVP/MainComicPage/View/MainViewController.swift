@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
     
     //MARK: Properties
     var presenter: ComicPresenterProtocol!
@@ -39,36 +39,36 @@ class ViewController: UIViewController {
     }
     
     private func layout() -> UICollectionViewCompositionalLayout {
-        let heightDimension = NSCollectionLayoutDimension.estimated(500)
-        
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1),
-            heightDimension: heightDimension)
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: heightDimension)
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        
-        let section = NSCollectionLayoutSection(group: group)
-        
-        return UICollectionViewCompositionalLayout(section: section)
-    }
+            let heightDimension = NSCollectionLayoutDimension.estimated(800)
+
+            let itemSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1),
+                heightDimension: heightDimension)
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                   heightDimension: heightDimension)
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+
+            let section = NSCollectionLayoutSection(group: group)
+
+            return UICollectionViewCompositionalLayout(section: section)
+            }
 }
 
 //MARK: ComicViewProtocol
-extension ViewController: ComicViewProtocol {
+extension MainViewController: ComicViewProtocol {
     func success() {
         collectionView.reloadData()
     }
     
     func failure(err: XkcdError) {
-        print("DEBUG: error implementation required \(err)")
+        print("DEBUG: error if parsing fails for a comic or its explaination \(err)")
     }
 }
 
 //MARK: CollectionView
-extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
     }
@@ -86,12 +86,12 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let comic = presenter.comic else { return }
-        let explaination = presenter.explaination ?? K.explainationNil.message
+        let explaination = presenter.explaination ?? "No explaination implemented, help us to edit it"
         presenter.comicTapped(comic: comic, explaination: explaination)
     }
 }
 
-extension ViewController: NavigationBarDelegate {
+extension MainViewController: NavigationBarDelegate {
     func fetchRandomComic() {
         presenter.fetchRandomComic()
     }

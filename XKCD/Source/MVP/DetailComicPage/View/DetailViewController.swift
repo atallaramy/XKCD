@@ -35,20 +35,18 @@ class DetailViewController: UIViewController {
     }
 }
 
-//MARK: DetailViewProtocol
+    //MARK: DetailViewProtocol
 extension DetailViewController: DetailViewProtocol {
     func success() {
         tableView.reloadData()
     }
     
     func failure(err: XkcdError) {
-        print("DEBUG: error implementaion required.\(err)")
+        print("DEBUG: error fetching Comic or Explaination, check other error message. \(err)")
     }
-    
 }
 
-
-//MARK: UITableViewDataSource
+    //MARK: UITableViewDataSource
 extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

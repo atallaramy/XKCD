@@ -35,7 +35,7 @@ class ComicNavigationBar: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-
+    
     //MARK: Selectors
     @objc func fetchRandomComic() {
         delegate?.fetchRandomComic()
@@ -57,9 +57,7 @@ class ComicNavigationBar: UIView {
         delegate?.fetchNewestComic()
     }
     
-    
     //MARK: Helpers
-    
     private func configureUI() {
         let stack = UIStackView(arrangedSubviews: [oldestComicButton, previousComicButton, randomComicButton, nextComicButton, newestComicButton])
         stack.axis = .horizontal

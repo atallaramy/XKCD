@@ -24,7 +24,7 @@ class DetailPresenter: DetailViewPresenterProtocol {
     var router: RouterProtocol?
     var explaination: String?
     var comic: Comic?
-
+    
     required init(view: DetailViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol, comic: Comic?, explaination: String?) {
         self.view = view
         self.networkService = networkService
@@ -32,5 +32,4 @@ class DetailPresenter: DetailViewPresenterProtocol {
         self.comic = comic
         self.explaination = explaination
     }
-    
-    }
+}

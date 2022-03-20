@@ -13,7 +13,6 @@
 		5873880127E0E9A90006681D /* XKCD.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 587387FF27E0E9A90006681D /* XKCD.xcdatamodeld */; };
 		5873880327E0E9AB0006681D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5873880227E0E9AB0006681D /* Assets.xcassets */; };
 		5873880627E0E9AB0006681D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5873880427E0E9AB0006681D /* LaunchScreen.storyboard */; };
-		5873881127E0E9AB0006681D /* XKCDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5873881027E0E9AB0006681D /* XKCDTests.swift */; };
 		5873881B27E0E9AB0006681D /* XKCDUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5873881A27E0E9AB0006681D /* XKCDUITests.swift */; };
 		5873881D27E0E9AB0006681D /* XKCDUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5873881C27E0E9AB0006681D /* XKCDUITestsLaunchTests.swift */; };
 		58E1BEE227E0EDB700E5696E /* Comic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E1BEE127E0EDB700E5696E /* Comic.swift */; };
@@ -68,7 +67,6 @@
 		5873880527E0E9AB0006681D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5873880727E0E9AB0006681D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5873880C27E0E9AB0006681D /* XKCDTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XKCDTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5873881027E0E9AB0006681D /* XKCDTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XKCDTests.swift; sourceTree = "<group>"; };
 		5873881627E0E9AB0006681D /* XKCDUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XKCDUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5873881A27E0E9AB0006681D /* XKCDUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XKCDUITests.swift; sourceTree = "<group>"; };
 		5873881C27E0E9AB0006681D /* XKCDUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XKCDUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -157,7 +155,6 @@
 			isa = PBXGroup;
 			children = (
 				58E1BF2F27E66C1B00E5696E /* TestMainModule */,
-				5873881027E0E9AB0006681D /* XKCDTests.swift */,
 			);
 			path = XKCDTests;
 			sourceTree = "<group>";
@@ -198,8 +195,8 @@
 		58E1BEE427E0EEA400E5696E /* MVP */ = {
 			isa = PBXGroup;
 			children = (
-				58E1BF1527E38C3D00E5696E /* DetailComicPage */,
 				58E1BF1127E32DDE00E5696E /* MainComicPage */,
+				58E1BF1527E38C3D00E5696E /* DetailComicPage */,
 			);
 			path = MVP;
 			sourceTree = "<group>";
@@ -496,7 +493,6 @@
 			files = (
 				58E1BF3127E66CC900E5696E /* ComicPresenterTest.swift in Sources */,
 				58E1BF3527E67C4100E5696E /* RouterTest.swift in Sources */,
-				5873881127E0E9AB0006681D /* XKCDTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,7 +8,7 @@
 import UIKit
 
 class DetailCell: UITableViewCell {
-    
+    //MARK: Properties
     var comic: Comic? {
         didSet {
             configure()
@@ -18,13 +18,15 @@ class DetailCell: UITableViewCell {
     let titleAndNubmerLabel = DetailLabel(fontSize: 24, weight: .bold, height: 28)
     let dateLabel = DetailLabel(fontSize: 24, weight: .bold, height: 28)
     lazy var comicImageView: UIImageView = {
-      let imView = UIImageView()
+        let imView = UIImageView()
         imView.anchor(height: 100)
         return imView
     }()
     
-    let explainationLabel = DetailLabel(fontSize: 16, weight: .light, backgroundColor: .systemGray3)
-    let transcriptLabel = DetailLabel(fontSize: 16, weight: .light, backgroundColor: .systemGray3)
+    let transcriptTitleLabel = DetailLabel(fontSize: 20, weight: .bold)
+    let transcriptLabel = DetailLabel(fontSize: 16, weight: .light)
+    let explainationTitleLabel = DetailLabel(fontSize: 20, weight: .bold)
+    let explainationLabel = DetailLabel(fontSize: 16, weight: .light)
     let cellView = UIView()
     
     
@@ -38,11 +40,13 @@ class DetailCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-
+    
     //MARK: Helpers
     private func configure() {
+        transcriptTitleLabel.text = "Transcript"
+        explainationTitleLabel.text = "Explaination"
         guard let comic = comic else { return }
-
+        
         let titleAndNumberText = "#\(comic.num):_\(comic.title)"
         titleAndNubmerLabel.text = titleAndNumberText
         let dateText = "\(comic.day ?? "")/\(comic.month ?? "")/\(comic.year ?? "")"
@@ -52,8 +56,8 @@ class DetailCell: UITableViewCell {
     }
     
     private func configureUI() {
-                let padding: CGFloat = 16
-        let stack = UIStackView(arrangedSubviews: [titleAndNubmerLabel, dateLabel, comicImageView, transcriptLabel, explainationLabel])
+        let padding: CGFloat = 16
+        let stack = UIStackView(arrangedSubviews: [titleAndNubmerLabel, dateLabel, comicImageView, transcriptTitleLabel, transcriptLabel, explainationTitleLabel, explainationLabel])
         cellView.addSubview(stack)
         stack.axis = .vertical
         stack.alignment = .center

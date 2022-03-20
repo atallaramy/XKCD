@@ -25,7 +25,7 @@ protocol ComicPresenterProtocol: AnyObject {
     func comicTapped(comic: Comic, explaination: String)
     var comic: Comic? { get set }
     var explaination:String? { get set }
-   
+    
 }
 
 class ComicPresenter: ComicPresenterProtocol {
@@ -48,10 +48,6 @@ class ComicPresenter: ComicPresenterProtocol {
         self.networkService = networkService
         self.router = router
         fetchCurrentWithExplaination()
-    }
-    
-    func comicTapped(comic: Comic, explaination: String) {
-        router?.showDetail(comic: comic, explaination: explaination)
     }
     
     public func fetchCurrentWithExplaination() {
@@ -105,6 +101,10 @@ class ComicPresenter: ComicPresenterProtocol {
         }
     }
     
+    func comicTapped(comic: Comic, explaination: String) {
+        router?.showDetail(comic: comic, explaination: explaination)
+    }
+    
     private func fetchExplaination(of comic: Comic) {
         networkService.fetchComicExplaination(comic: comic) { result in
             switch result {
@@ -113,6 +113,7 @@ class ComicPresenter: ComicPresenterProtocol {
                 self.view?.success()
             case .failure(let err):
                 self.view?.failure(err: err)
+                print("DEBUG: This comic has no explaination or fetching explaination failed")
             }
         }
     }
