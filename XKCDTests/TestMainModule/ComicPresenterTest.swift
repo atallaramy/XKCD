@@ -79,7 +79,6 @@ class ComicPresenterTest: XCTestCase {
     }
     
     func testGetFailureComic() {
-        let comic = Comic(num: 1, day: "2", month: "2", year: "2", link: "link", news: "news", safeTitle: "safeTitle", transcript: "transcript", alternativeText: "alternativeText", image: URL(string: "url")!, title: "title")
         view = MockView()
         networkService = MockNetworkService()
         presenter = ComicPresenter(view: view, networkService: networkService, router: router)

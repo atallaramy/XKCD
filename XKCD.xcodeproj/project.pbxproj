@@ -120,6 +120,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5831FB9428C7BE330075784A /* DetailComicPage2 */ = {
+			isa = PBXGroup;
+			children = (
+				5831FB9728C7BE5F0075784A /* Module */,
+				5831FB9628C7BE560075784A /* View */,
+				5831FB9528C7BE460075784A /* Presenter */,
+			);
+			path = DetailComicPage2;
+			sourceTree = "<group>";
+		};
+		5831FB9528C7BE460075784A /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		5831FB9628C7BE560075784A /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5831FB9728C7BE5F0075784A /* Module */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
 		587387EA27E0E9A90006681D = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +228,7 @@
 			children = (
 				58E1BF1127E32DDE00E5696E /* MainComicPage */,
 				58E1BF1527E38C3D00E5696E /* DetailComicPage */,
+				5831FB9428C7BE330075784A /* DetailComicPage2 */,
 			);
 			path = MVP;
 			sourceTree = "<group>";

@@ -25,11 +25,9 @@ protocol ComicPresenterProtocol: AnyObject {
     func comicTapped(comic: Comic, explaination: String)
     var comic: Comic? { get set }
     var explaination:String? { get set }
-    
 }
 
 class ComicPresenter: ComicPresenterProtocol {
-    
     
     var comic: Comic?
     var explaination: String?

@@ -25,7 +25,7 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        
+        tableView.reloadData()
     }
     
     //MARK: Helpers
