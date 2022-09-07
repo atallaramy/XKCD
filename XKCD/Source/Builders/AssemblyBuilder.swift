@@ -10,6 +10,7 @@ import UIKit
 protocol AssemblyBuilderProtocol {
     func createComicModule(router: RouterProtocol) -> UIViewController
     func createDetialModule(comic: Comic?, explaination: String, router: RouterProtocol) -> UIViewController
+    func createDetail2Module(comic: Comic?, explaination: String, router: RouterProtocol) -> UIViewController
 }
 
 class AssemblyBuilder: AssemblyBuilderProtocol {
@@ -25,6 +26,14 @@ class AssemblyBuilder: AssemblyBuilderProtocol {
         let view = DetailViewController()
         let networkService = NetworkManager()
         let presenter = DetailPresenter(view: view, networkService: networkService, router: router, comic: comic, explaination: explaination)
+        view.presenter = presenter
+        return view
+    }
+    
+    func createDetail2Module(comic: Comic?, explaination: String, router: RouterProtocol) -> UIViewController {
+        let view = DetailView2Controller()
+        let networkService = NetworkManager()
+        let presenter = Detail2Presenter(view: view, networkService: networkService, router: router, comic: comic, explaination: explaination)
         view.presenter = presenter
         return view
     }

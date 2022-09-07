@@ -58,6 +58,7 @@ class DetailCell: UITableViewCell {
     private func configureUI() {
         let padding: CGFloat = 16
         let stack = UIStackView(arrangedSubviews: [titleAndNubmerLabel, dateLabel, comicImageView, transcriptTitleLabel, transcriptLabel, explainationTitleLabel, explainationLabel])
+        backgroundColor = .systemGray4
         cellView.addSubview(stack)
         stack.axis = .vertical
         stack.alignment = .center

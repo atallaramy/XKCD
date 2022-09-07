@@ -18,7 +18,7 @@ class DetailLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(fontSize: CGFloat, weight: UIFont.Weight, height: CGFloat? = nil, backgroundColor: UIColor = .white) {
+    convenience init(fontSize: CGFloat, weight: UIFont.Weight, height: CGFloat? = nil, backgroundColor: UIColor = .systemGray4) {
         self.init(frame: .zero)
         self.font = UIFont.systemFont(ofSize: fontSize, weight: weight)
         self.backgroundColor = backgroundColor

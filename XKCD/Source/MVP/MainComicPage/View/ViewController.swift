@@ -33,9 +33,15 @@ class ViewController: UIViewController {
     private func configureUI() {
         view.addSubview(collectionView)
         collectionView.backgroundColor = .gray
-        collectionView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor)
+        collectionView.anchor(top: view.safeAreaLayoutGuide.topAnchor,
+                              left: view.leftAnchor,
+                              right: view.rightAnchor)
         view.addSubview(navigationBar)
-        navigationBar.anchor(top: collectionView.bottomAnchor, left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor , right: view.rightAnchor, paddingTop: 10, height: 44)
+        navigationBar.anchor(top: collectionView.bottomAnchor,
+                             left: view.leftAnchor,
+                             bottom: view.safeAreaLayoutGuide.bottomAnchor,
+                             right: view.rightAnchor,
+                             paddingTop: 10, height: 44)
     }
     
     private func layout() -> UICollectionViewCompositionalLayout {
@@ -63,7 +69,7 @@ extension ViewController: ComicViewProtocol {
     }
     
     func failure(err: XkcdError) {
-        print("DEBUG: error implementation required \(err)")
+        print("DEBUG: couldn't fetch explaination \(err)")
     }
 }
 
@@ -76,6 +82,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ComicCell.reuseID, for: indexPath) as! ComicCell
         let comic = presenter.comic
+        print("DEBUG: checking transcript \(comic?.transcript ?? "trnscript is missing")")
         cell.comic = comic
         return cell
     }

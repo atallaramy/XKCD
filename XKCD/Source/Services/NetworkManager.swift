@@ -39,29 +39,30 @@ class NetworkManager: NetworkServiceProtocol {
     
     /// Fetching Generic Method
     private func loadURLAndDecode<D: Decodable>(urlString: String, completion: @escaping (Result<D, XkcdError>) -> Void) {
-        guard let url = URL(string: urlString) else {
+        guard let url = urlString.getCleanURL() else {
             completion(.failure(.invalidEndPoint))
             return
         }
+        print("DEBUG: urlstring is \(urlString)")
         
         urlSession.dataTask(with: url) { [weak self] data, response, err in
             guard let self = self else { return }
-
+            
             if err != nil {
                 self.completionHandlerOnMainThrea(with: .failure(.invalidEndPoint), completion: completion)
                 return
             }
-
+            
             guard let response = response as? HTTPURLResponse, (200..<300).contains(response.statusCode) else {
                 self.completionHandlerOnMainThrea(with: .failure(.invalidResponse), completion: completion)
                 return
             }
-
+            
             guard let data = data else {
                 self.completionHandlerOnMainThrea(with: .failure(.noData), completion: completion)
                 return
             }
-
+            
             do {
                 let decodedResponse = try self.jsonDecoder.decode(D.self, from: data)
                 self.completionHandlerOnMainThrea(with: .success(decodedResponse), completion: completion)
@@ -70,7 +71,7 @@ class NetworkManager: NetworkServiceProtocol {
             }
         }.resume()
     }
-
+    
     private func completionHandlerOnMainThrea<D: Decodable>(with result: Result<D, XkcdError>, completion: @escaping (Result<D, XkcdError>) -> Void) {
         DispatchQueue.main.async {
             completion(result)
@@ -78,6 +79,6 @@ class NetworkManager: NetworkServiceProtocol {
     }
 }
 
-    
-    
+
+
 

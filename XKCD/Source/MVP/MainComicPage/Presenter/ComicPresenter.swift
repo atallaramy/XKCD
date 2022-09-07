@@ -30,7 +30,14 @@ protocol ComicPresenterProtocol: AnyObject {
 class ComicPresenter: ComicPresenterProtocol {
     
     var comic: Comic?
-    var explaination: String?
+    var explaination: String? {
+        didSet {
+            guard let explaination = explaination else {
+                return
+            }
+            print(explaination)
+        }
+    }
     var currentComicNum: Int!
     var maxComicNum: Int!
     
@@ -50,6 +57,7 @@ class ComicPresenter: ComicPresenterProtocol {
     
     public func fetchCurrentWithExplaination() {
         fetchCurrenComic {[weak self] comic in
+        print("DEBUGing transcript: \(String(describing: comic.transcript))")
             guard let self = self else { return }
             self.fetchExplaination(of: comic)
         }
@@ -63,7 +71,7 @@ class ComicPresenter: ComicPresenterProtocol {
     }
     
     private func fetchCurrenComic(completion: @escaping (_ comic: Comic) -> Void) {
-        networkService.fetchCurrent {[weak self]result in
+        networkService.fetchCurrent { [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 switch result {

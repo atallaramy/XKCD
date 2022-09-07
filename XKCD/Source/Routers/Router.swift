@@ -15,6 +15,7 @@ protocol RouterMain {
 protocol RouterProtocol: RouterMain {
     func initialViewController()
     func showDetail(comic: Comic, explaination: String)
+    func showDetail2(comic: Comic, explaination: String)
     func popToRoot()
 }
 
@@ -40,6 +41,14 @@ class Router: RouterProtocol {
             navigationController.isNavigationBarHidden = true
             guard let detailViewController = assemblyBuilder?.createDetialModule(comic: comic, explaination: explaination, router: self) else { return }
             navigationController.present(detailViewController, animated: true, completion: nil)
+        }
+    }
+    
+    func showDetail2(comic: Comic, explaination: String) {
+        if let navigationController = navigationController {
+            navigationController.isNavigationBarHidden = true
+            guard let detail2ViewController = assemblyBuilder?.createDetail2Module(comic: comic, explaination: explaination, router: self) else { return }
+            navigationController.present(detail2ViewController, animated: true)
         }
     }
     
