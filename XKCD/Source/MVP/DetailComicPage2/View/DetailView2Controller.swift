@@ -12,8 +12,16 @@ class DetailView2Controller: UIViewController {
     //  MARK: - Properties
     var presenter: Detail2Presenter!
     
+    lazy var dismissButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
+        button.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
+        return  button
+    }()
+    
     let titleAndNubmerLabel = DetailLabel(fontSize: 24, weight: .bold, height: 28)
     let dateLabel = DetailLabel(fontSize: 24, weight: .bold, height: 28)
+    
     lazy var comicImageView: UIImageView = {
         let imView = UIImageView()
         imView.anchor(height: 100)
@@ -34,6 +42,11 @@ class DetailView2Controller: UIViewController {
         configure()
         configureUI()
         presenter.setComic()
+    }
+    
+    //  MARK: - Selectors
+    @objc func dismissView() {
+        presenter.dismiss()
     }
     
     //  MARK: - Helpers
@@ -82,9 +95,19 @@ class DetailView2Controller: UIViewController {
                      paddingLeft: padding,
                      paddingBottom: padding,
                      paddingRight: padding)
+        
+        contentView.addSubview(dismissButton)
+        dismissButton.anchor(top: contentView.topAnchor,
+                      right: contentView.rightAnchor,
+                      paddingTop: 8,
+                      paddingRight: 8,
+                      width: 44,
+                      height: 44)
     }
 }
 
+
+    //  MARK: - DetailView2Protocol
 extension DetailView2Controller: DetailView2Protocol {
     func setComic(_ comic: Comic, explaination: String) {
         let titleAndNumberText = "#\(comic.num):_ \(comic.title)"

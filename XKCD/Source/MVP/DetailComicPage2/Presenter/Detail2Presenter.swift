@@ -9,6 +9,7 @@ import Foundation
 
 protocol DetailView2Protocol: AnyObject {
     func setComic(_ comic: Comic, explaination: String)
+    func dismissView()
 }
 
 protocol DetailView2PresenterProtocol: AnyObject {
@@ -16,6 +17,7 @@ protocol DetailView2PresenterProtocol: AnyObject {
     var comic: Comic? { get set }
     var explaination: String? { get set }
     func setComic()
+    func dismiss()
 }
 
 class Detail2Presenter: DetailView2PresenterProtocol {
@@ -36,5 +38,9 @@ class Detail2Presenter: DetailView2PresenterProtocol {
     func setComic() {
         guard let comic = comic, let explaination = explaination else { return }
         view?.setComic(comic, explaination: explaination)
+    }
+    
+    func dismiss() {
+        router?.dimiss()
     }
 }

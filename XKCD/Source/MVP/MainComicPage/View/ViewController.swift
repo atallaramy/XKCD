@@ -82,7 +82,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ComicCell.reuseID, for: indexPath) as! ComicCell
         let comic = presenter.comic
-        print("DEBUG: checking transcript \(comic?.transcript ?? "trnscript is missing")")
         cell.comic = comic
         return cell
     }

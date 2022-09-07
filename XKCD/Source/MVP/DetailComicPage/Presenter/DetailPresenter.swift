@@ -10,12 +10,14 @@ import Foundation
 protocol DetailViewProtocol: AnyObject {
     func success()
     func failure(err: XkcdError)
+    func dimissView()
 }
 
 protocol DetailViewPresenterProtocol: AnyObject {
     init(view: DetailViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol, comic: Comic?, explaination: String?)
     var comic: Comic? { get set }
     var explaination: String? { get set }
+    func dimiss()
 }
 
 class DetailPresenter: DetailViewPresenterProtocol {
@@ -31,5 +33,9 @@ class DetailPresenter: DetailViewPresenterProtocol {
         self.router = router
         self.comic = comic
         self.explaination = explaination
+    }
+   
+    func dimiss() {
+        router?.dimiss()
     }
 }

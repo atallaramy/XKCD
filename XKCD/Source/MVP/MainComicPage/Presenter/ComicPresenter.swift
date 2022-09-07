@@ -108,7 +108,7 @@ class ComicPresenter: ComicPresenterProtocol {
     }
     
     func comicTapped(comic: Comic, explaination: String) {
-        router?.showDetail(comic: comic, explaination: explaination)
+        router?.showDetail2(comic: comic, explaination: explaination)
     }
     
     private func fetchExplaination(of comic: Comic) {

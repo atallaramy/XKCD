@@ -17,15 +17,29 @@ class DetailViewController: UIViewController {
         tv.frame = view.bounds
         tv.separatorStyle = .none
         tv.frame = view.bounds
+        tv.backgroundColor = .systemGray4
         tv.register(DetailCell.self, forCellReuseIdentifier: DetailCell.reuseID)
         return tv
     }()
     
+    lazy var dismissButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
+        button.addTarget(self, action: #selector(dimissView), for: .touchUpInside)
+        return  button
+    }()
     
+    //  MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
         tableView.reloadData()
+        configureUI()
+    }
+    
+    //  MARK: - Selectors
+    @objc func dimissView() {
+        presenter.dimiss()
     }
     
     //MARK: Helpers
@@ -33,10 +47,21 @@ class DetailViewController: UIViewController {
         view.addSubview(tableView)
         tableView.dataSource = self
     }
+    
+    private func configureUI() {
+        view.addSubview(dismissButton)
+        dismissButton.anchor(top: view.topAnchor,
+                      right: view.rightAnchor,
+                      paddingTop: 8,
+                      paddingRight: 8,
+                      width: 44,
+                      height: 44)
+    }
 }
 
     //MARK: DetailViewProtocol
 extension DetailViewController: DetailViewProtocol {
+    
     func success() {
         tableView.reloadData()
     }

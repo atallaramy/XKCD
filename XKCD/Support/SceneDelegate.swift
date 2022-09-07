@@ -20,11 +20,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = scene
         let navigationController = UINavigationController()
+        let done = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismiss))
+        navigationController.navigationItem.rightBarButtonItem = done
         let assemblyBuilder = AssemblyBuilder()
         let router = Router(navigationController: navigationController, assemblyBuilder: assemblyBuilder)
         router.initialViewController()
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
+    }
+    
+    @objc func dismiss() {
         
     }
 
