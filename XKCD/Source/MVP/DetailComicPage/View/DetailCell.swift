@@ -51,7 +51,7 @@ class DetailCell: UITableViewCell {
         titleAndNubmerLabel.text = titleAndNumberText
         let dateText = "\(comic.day ?? "")/\(comic.month ?? "")/\(comic.year ?? "")"
         dateLabel.text = dateText
-        comicImageView.loadResizeAndCache(url: comic.image, targetWidth: self.frame.width)
+        comicImageView.loadResizeAndCache(url: comic.image, targetHeight: 100)
         transcriptLabel.text = comic.transcript == "" ? "No transcript available" : comic.transcript
     }
     
@@ -62,6 +62,7 @@ class DetailCell: UITableViewCell {
         cellView.addSubview(stack)
         stack.axis = .vertical
         stack.alignment = .center
+        stack.setCustomSpacing(padding, after: dateLabel)
         stack.setCustomSpacing(padding, after: comicImageView)
         stack.setCustomSpacing(padding, after: transcriptLabel)
         addSubview(cellView)

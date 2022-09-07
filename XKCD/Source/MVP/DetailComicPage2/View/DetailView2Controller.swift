@@ -21,13 +21,7 @@ class DetailView2Controller: UIViewController {
     
     let titleAndNubmerLabel = DetailLabel(fontSize: 24, weight: .bold, height: 28)
     let dateLabel = DetailLabel(fontSize: 24, weight: .bold, height: 28)
-    
-    lazy var comicImageView: UIImageView = {
-        let imView = UIImageView()
-        imView.anchor(height: 100)
-        return imView
-    }()
-    
+    let comicImageView = UIImageView()
     let transcriptTitleLabel = DetailLabel(fontSize: 20, weight: .bold)
     let transcriptLabel = DetailLabel(fontSize: 16, weight: .light)
     let explainationTitleLabel = DetailLabel(fontSize: 20, weight: .bold)
@@ -85,6 +79,7 @@ class DetailView2Controller: UIViewController {
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
         stack.alignment = .center
+        stack.setCustomSpacing(padding, after: dateLabel)
         stack.setCustomSpacing(padding, after: comicImageView)
         stack.setCustomSpacing(padding, after: transcriptLabel)
         stack.anchor(top: contentView.topAnchor,
@@ -114,7 +109,7 @@ extension DetailView2Controller: DetailView2Protocol {
         titleAndNubmerLabel.text = titleAndNumberText
         let dateText = "\(comic.day ?? "")\(comic.month ?? "")\(comic.year ?? "")"
         dateLabel.text = dateText
-        comicImageView.loadResizeAndCache(url: comic.image, targetWidth: view.frame.width)
+        comicImageView.loadResizeAndCache(url: comic.image, targetHeight: 100)
         transcriptLabel.text = comic.transcript == "" ? "No transcript available" : comic.transcript
         explainationLabel.text = explaination
     }

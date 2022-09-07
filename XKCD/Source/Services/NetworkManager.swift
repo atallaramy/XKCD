@@ -43,7 +43,6 @@ class NetworkManager: NetworkServiceProtocol {
             completion(.failure(.invalidEndPoint))
             return
         }
-        print("DEBUG: urlstring is \(urlString)")
         
         urlSession.dataTask(with: url) { [weak self] data, response, err in
             guard let self = self else { return }

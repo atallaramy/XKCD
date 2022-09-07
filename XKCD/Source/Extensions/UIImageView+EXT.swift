@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIImageView {
-    func loadResizeAndCache(url: URL, targetWidth: CGFloat) {
+    func loadResizeAndCache(url: URL, targetWidth: CGFloat? = nil, targetHeight: CGFloat? = nil) {
         let cache = NSCache<NSString, UIImage>()
         let urlString = url.absoluteString as NSString
         if let image = cache.object(forKey: urlString) {
@@ -17,9 +17,17 @@ extension UIImageView {
         DispatchQueue.global().async { [weak self] in
             if let data = try? Data(contentsOf: url) {
                 if let image = UIImage(data: data) {
-                    let resized = image.resize(targetWidth: targetWidth)
-                    DispatchQueue.main.async {
-                        self?.image = resized
+                    if let targetWidth = targetWidth {
+                        let resized = image.resizeToFitMainComicView(targetWidth: targetWidth)
+                        DispatchQueue.main.async {
+                            self?.image = resized
+                        }
+                    }
+                    if let targetHeight = targetHeight {
+                        let resized = image.resizeToFitDetailComicView(targetHeight: targetHeight)
+                        DispatchQueue.main.async {
+                            self?.image = resized
+                        }
                     }
                     cache.object(forKey: urlString)
                 }
