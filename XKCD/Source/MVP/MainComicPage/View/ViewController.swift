@@ -97,6 +97,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     }
 }
 
+    //  MARK: - NavigationBarDelegate
 extension ViewController: NavigationBarDelegate {
     func fetchRandomComic() {
         presenter.fetchRandomComic()

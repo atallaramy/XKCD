@@ -34,7 +34,7 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         configureTableView()
         tableView.reloadData()
-        configureUI()
+        layout()
     }
     
     //  MARK: - Selectors
@@ -48,7 +48,7 @@ class DetailViewController: UIViewController {
         tableView.dataSource = self
     }
     
-    private func configureUI() {
+    private func layout() {
         view.addSubview(dismissButton)
         dismissButton.anchor(top: view.topAnchor,
                       right: view.rightAnchor,

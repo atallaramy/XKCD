@@ -8,7 +8,7 @@
 import UIKit
 
 class DetailView2Controller: UIViewController {
-
+    
     //  MARK: - Properties
     var presenter: Detail2Presenter!
     
@@ -27,14 +27,21 @@ class DetailView2Controller: UIViewController {
     let explainationTitleLabel = DetailLabel(fontSize: 20, weight: .bold)
     let explainationLabel = DetailLabel(fontSize: 16, weight: .light)
     
+    lazy var stack = UIStackView(arrangedSubviews: [titleAndNubmerLabel,
+                                               dateLabel,
+                                               comicImageView,
+                                               transcriptTitleLabel,
+                                               transcriptLabel,
+                                               explainationTitleLabel,
+                                               explainationLabel])
     let scrollView = UIScrollView(frame: .zero)
     let contentView = UIView(frame: .zero)
     
     //  MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        configure()
-        configureUI()
+        style()
+        layout()
         presenter.setComic()
     }
     
@@ -44,14 +51,23 @@ class DetailView2Controller: UIViewController {
     }
     
     //  MARK: - Helpers
-    private func configure() {
-        transcriptTitleLabel.text = "Transcript"
-        explainationTitleLabel.text = "Explaination"
-    }
-    
-    private func configureUI() {
+    private func style() {
         view.backgroundColor = .systemGray4
         
+        titleAndNubmerLabel.adjustsFontSizeToFitWidth = true
+        transcriptTitleLabel.text = "Transcript"
+        explainationTitleLabel.text = "Explaination"
+        
+        let padding: CGFloat = 16
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .vertical
+        stack.alignment = .center
+        stack.setCustomSpacing(padding, after: dateLabel)
+        stack.setCustomSpacing(padding, after: comicImageView)
+        stack.setCustomSpacing(padding, after: transcriptLabel)
+    }
+    
+    private func layout() {
         view.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.anchor(top: view.topAnchor,
@@ -62,26 +78,14 @@ class DetailView2Controller: UIViewController {
         scrollView.addSubview(contentView)
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.anchor(top: scrollView.contentLayoutGuide.topAnchor,
-                         left: scrollView.contentLayoutGuide.leftAnchor,
-                         bottom: scrollView.contentLayoutGuide.bottomAnchor,
-                         right: scrollView.contentLayoutGuide.rightAnchor,
-                         widthConstrain: view.widthAnchor)
+                           left: scrollView.contentLayoutGuide.leftAnchor,
+                           bottom: scrollView.contentLayoutGuide.bottomAnchor,
+                           right: scrollView.contentLayoutGuide.rightAnchor,
+                           widthConstrain: view.widthAnchor)
         
-        let padding: CGFloat = 16
-        let stack = UIStackView(arrangedSubviews: [titleAndNubmerLabel,
-                                                   dateLabel,
-                                                   comicImageView,
-                                                   transcriptTitleLabel,
-                                                   transcriptLabel,
-                                                   explainationTitleLabel,
-                                                   explainationLabel])
+        
         contentView.addSubview(stack)
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        stack.alignment = .center
-        stack.setCustomSpacing(padding, after: dateLabel)
-        stack.setCustomSpacing(padding, after: comicImageView)
-        stack.setCustomSpacing(padding, after: transcriptLabel)
+        let padding: CGFloat = 16
         stack.anchor(top: contentView.topAnchor,
                      left: contentView.leftAnchor,
                      bottom: contentView.bottomAnchor,
@@ -93,16 +97,16 @@ class DetailView2Controller: UIViewController {
         
         contentView.addSubview(dismissButton)
         dismissButton.anchor(top: contentView.topAnchor,
-                      right: contentView.rightAnchor,
-                      paddingTop: 8,
-                      paddingRight: 8,
-                      width: 44,
-                      height: 44)
+                             right: contentView.rightAnchor,
+                             paddingTop: 8,
+                             paddingRight: 8,
+                             width: 44,
+                             height: 44)
     }
 }
 
 
-    //  MARK: - DetailView2Protocol
+//  MARK: - DetailView2Protocol
 extension DetailView2Controller: DetailView2Protocol {
     func setComic(_ comic: Comic, explaination: String) {
         let titleAndNumberText = "#\(comic.num):_ \(comic.title)"

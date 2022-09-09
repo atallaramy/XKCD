@@ -33,7 +33,8 @@ class ComicCell: UICollectionViewCell {
     //MARK: LifeCycle
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureUI()
+        backgroundColor = .clear
+        layout()
     }
     
     required init?(coder: NSCoder) {
@@ -47,9 +48,8 @@ class ComicCell: UICollectionViewCell {
         titleLabel.text = comic?.title
     }
     
-    private func configureUI() {
+    private func layout() {
         addSubview(imageVw)
-        backgroundColor = .clear
         imageVw.center = center
         addSubview(titleLabel)
         titleLabel.centerX(inView: self)
