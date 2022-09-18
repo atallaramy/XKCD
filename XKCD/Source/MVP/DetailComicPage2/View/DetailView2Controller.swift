@@ -42,6 +42,7 @@ class DetailView2Controller: UIViewController {
         super.viewDidLoad()
         style()
         layout()
+        addDismissButton()
         presenter.setComic()
     }
     
@@ -102,6 +103,10 @@ class DetailView2Controller: UIViewController {
                              paddingRight: 8,
                              width: 44,
                              height: 44)
+    }
+    
+    private func addDismissButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(dismissView))
     }
 }
 

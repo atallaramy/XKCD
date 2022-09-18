@@ -8,39 +8,30 @@
 import UIKit
 
 extension UIImage {
-    func resizeToFitMainComicView(targetWidth: CGFloat) -> UIImage? {
-        let size = self.size
-        
-        let widthRatio = targetWidth / size.width
-        
-        var newSize: CGSize
-        newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
-        
-        let rect = CGRect(origin: .zero, size: newSize)
-        
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        self.draw(in: rect)
-        
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage
+    
+    func resize(width: CGFloat) -> UIImage {
+        let height = (width/self.size.width)*self.size.height
+        return self.resize(size: CGSize(width: width, height: height))
     }
     
-    func resizeToFitDetailComicView(targetHeight: CGFloat) -> UIImage? {
-        let size = self.size
-        
-        let heightRatio = targetHeight / size.height
-        
-        var newSize: CGSize
-        newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
-        
-        let rect = CGRect(origin: .zero, size: newSize)
-        
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        self.draw(in: rect)
-        
+    func resize(height: CGFloat) -> UIImage {
+        let width = (height/self.size.height)*self.size.width
+        return self.resize(size: CGSize(width: width, height: height))
+    }
+    
+    func resize(size: CGSize) -> UIImage {
+        let widthRatio  = size.width/self.size.width
+        let heightRatio = size.height/self.size.height
+        var updateSize = size
+        if(widthRatio > heightRatio) {
+            updateSize = CGSize(width:self.size.width*heightRatio, height:self.size.height*heightRatio)
+        } else if heightRatio > widthRatio {
+            updateSize = CGSize(width:self.size.width*widthRatio,  height:self.size.height*widthRatio)
+        }
+        UIGraphicsBeginImageContextWithOptions(updateSize, false, UIScreen.main.scale)
+        self.draw(in: CGRect(origin: .zero, size: updateSize))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return newImage
+        return newImage!
     }
 }

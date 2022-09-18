@@ -46,7 +46,9 @@ class Router: RouterProtocol {
     func showDetail2(comic: Comic, explaination: String) {
         if let navigationController = navigationController {
             guard let detail2ViewController = assemblyBuilder?.createDetail2Module(comic: comic, explaination: explaination, router: self) else { return }
-            navigationController.present(detail2ViewController, animated: true)
+            let detail2NavigationController = UINavigationController.init(rootViewController: detail2ViewController)
+            navigationController.present(detail2NavigationController, animated: true)
+//            present(detail2ViewController, animated: true)
         }
     }
     
