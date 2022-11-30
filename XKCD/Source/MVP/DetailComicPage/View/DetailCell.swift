@@ -10,10 +10,7 @@ import UIKit
 class DetailCell: UITableViewCell {
     //MARK: Properties
     var comic: Comic? {
-        didSet {
-            configure()
-        }
-    }
+        didSet { Task { await configure() }}}
     
     let titleAndNubmerLabel = DetailLabel(fontSize: 24, weight: .bold, height: 28)
     let dateLabel = DetailLabel(fontSize: 24, weight: .bold, height: 28)
@@ -42,7 +39,7 @@ class DetailCell: UITableViewCell {
     
     
     //MARK: Helpers
-    private func configure() {
+    private func configure() async {
         transcriptTitleLabel.text = "Transcript"
         explainationTitleLabel.text = "Explaination"
         guard let comic = comic else { return }
@@ -51,8 +48,11 @@ class DetailCell: UITableViewCell {
         titleAndNubmerLabel.text = titleAndNumberText
         let dateText = "\(comic.day ?? "")/\(comic.month ?? "")/\(comic.year ?? "")"
         dateLabel.text = dateText
-        comicImageView.loadResizeAndCache(url: comic.image, targetHeight: 100)
-        transcriptLabel.text = comic.transcript == "" ? "No transcript available" : comic.transcript
+        Task {
+            try await comicImageView.loadResizeAndCache(url: comic.image, targetHeight: 100)
+            transcriptLabel.text = comic.transcript == "" ? "No transcript available" : comic.transcript
+        }
+        
     }
     
     private func configureUI() {

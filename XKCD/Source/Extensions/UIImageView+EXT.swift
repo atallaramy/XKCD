@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIImageView {
-    func loadResizeAndCache(url: URL, targetWidth: CGFloat? = nil, targetHeight: CGFloat? = nil) {
+    func loadResizeAndCache(url: URL, targetWidth: CGFloat? = nil, targetHeight: CGFloat? = nil) async throws {
         let cache = NSCache<NSString, UIImage>()
         let urlString = url.absoluteString as NSString
         if let image = cache.object(forKey: urlString) {
@@ -21,8 +21,8 @@ extension UIImageView {
                 self.setImageOnMainThread(image: resizedImage)
             }
         } else {
-            guard let data = try? Data(contentsOf: url) else { return }
-            guard let image = UIImage(data: data) else { return }
+            
+            let image = try await fetchAndLoadImage(url: url)
             cache.setObject(image, forKey: urlString)
             if let targetWidth = targetWidth {
                 let resizedImage = image.resize(width: targetWidth)
@@ -41,5 +41,21 @@ extension UIImageView {
             self.image = image
         }
     }
+    
+    func fetchAndLoadImage(url: URL) async throws -> UIImage {
+        let (data, response) = try await URLSession.shared.data(from: url)
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200..<300) ~= httpResponse.statusCode else {
+            throw XkcdError.invalidResponse
+        }
+        
+        guard let image = UIImage(data: data) else {
+            throw XkcdError.unsupportedImage
+        }
+        
+        return image
+    }
 }
+
+
 

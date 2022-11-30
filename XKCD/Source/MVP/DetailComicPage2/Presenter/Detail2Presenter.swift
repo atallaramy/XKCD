@@ -8,7 +8,7 @@
 import Foundation
 
 protocol DetailView2Protocol: AnyObject {
-    func setComic(_ comic: Comic, explaination: String)
+    func setComic(_ comic: Comic, explaination: String) async
     func dismissView()
 }
 
@@ -16,7 +16,7 @@ protocol DetailView2PresenterProtocol: AnyObject {
     init(view: DetailView2Protocol, networkService: NetworkServiceProtocol, router: RouterProtocol, comic: Comic?, explaination: String?)
     var comic: Comic? { get set }
     var explaination: String? { get set }
-    func setComic()
+    func setComic() async
     func dismiss()
 }
 
@@ -35,9 +35,11 @@ class Detail2Presenter: DetailView2PresenterProtocol {
         self.explaination = explaination
     }
     
-    func setComic() {
+    func setComic() async {
         guard let comic = comic, let explaination = explaination else { return }
-        view?.setComic(comic, explaination: explaination)
+        Task {
+            await view?.setComic(comic, explaination: explaination)
+        }
     }
     
     func dismiss() {

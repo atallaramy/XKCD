@@ -28,12 +28,12 @@ class DetailView2Controller: UIViewController {
     let explainationLabel = DetailLabel(fontSize: 16, weight: .light)
     
     lazy var stack = UIStackView(arrangedSubviews: [titleAndNubmerLabel,
-                                               dateLabel,
-                                               comicImageView,
-                                               transcriptTitleLabel,
-                                               transcriptLabel,
-                                               explainationTitleLabel,
-                                               explainationLabel])
+                                                    dateLabel,
+                                                    comicImageView,
+                                                    transcriptTitleLabel,
+                                                    transcriptLabel,
+                                                    explainationTitleLabel,
+                                                    explainationLabel])
     let scrollView = UIScrollView(frame: .zero)
     let contentView = UIView(frame: .zero)
     
@@ -43,7 +43,9 @@ class DetailView2Controller: UIViewController {
         style()
         layout()
         addDismissButton()
-        presenter.setComic()
+        Task {
+            await presenter.setComic()
+        }
     }
     
     //  MARK: - Selectors
@@ -113,13 +115,16 @@ class DetailView2Controller: UIViewController {
 
 //  MARK: - DetailView2Protocol
 extension DetailView2Controller: DetailView2Protocol {
-    func setComic(_ comic: Comic, explaination: String) {
+    func setComic(_ comic: Comic, explaination: String) async {
         let titleAndNumberText = "#\(comic.num):_ \(comic.title)"
         titleAndNubmerLabel.text = titleAndNumberText
         let dateText = "\(comic.day ?? "")\(comic.month ?? "")\(comic.year ?? "")"
         dateLabel.text = dateText
-        comicImageView.loadResizeAndCache(url: comic.image, targetHeight: 100)
-        transcriptLabel.text = comic.transcript == "" ? "No transcript available" : comic.transcript
-        explainationLabel.text = explaination
+        Task {
+            try await comicImageView.loadResizeAndCache(url: comic.image, targetHeight: 100)
+            transcriptLabel.text = comic.transcript == "" ? "No transcript available" : comic.transcript
+            explainationLabel.text = explaination
+        }
+        
     }
 }

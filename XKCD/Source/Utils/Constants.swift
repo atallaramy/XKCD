@@ -28,6 +28,7 @@ enum XkcdError: Error, CustomNSError {
     case invalidResponse
     case noData
     case serializationError
+    case unsupportedImage
     
     var localizedDescription: String {
         switch self {
@@ -36,6 +37,7 @@ enum XkcdError: Error, CustomNSError {
         case .invalidResponse: return "Invalid https response"
         case .noData: return "No Data found"
         case .serializationError: return "Unable to decode data"
+        case .unsupportedImage: return "the data loaded has unsupported image"
         }
     }
     

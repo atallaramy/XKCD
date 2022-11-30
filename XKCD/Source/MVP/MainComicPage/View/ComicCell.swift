@@ -25,10 +25,7 @@ class ComicCell: UICollectionViewCell {
     }()
     
     var comic: Comic? {
-        didSet {
-            configure()
-        }
-    }
+        didSet { Task { await configure() }}}
     
     //MARK: LifeCycle
     override init(frame: CGRect) {
@@ -42,10 +39,12 @@ class ComicCell: UICollectionViewCell {
     }
     
     //MARK: Helpers
-    private func configure() {
+    private func configure() async {
         guard let url = comic?.image else { return }
-        imageVw.loadResizeAndCache(url: url, targetWidth: UIScreen.main.bounds.width)
-        titleLabel.text = comic?.title
+        Task {
+            try await imageVw.loadResizeAndCache(url: url, targetWidth: UIScreen.main.bounds.width)
+            titleLabel.text = comic?.title
+        }
     }
     
     private func layout() {
