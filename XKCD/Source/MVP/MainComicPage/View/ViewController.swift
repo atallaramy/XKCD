@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
     
     //MARK: Properties
     var presenter: ComicPresenterProtocol!
@@ -63,7 +63,7 @@ class ViewController: UIViewController {
 }
 
 //MARK: ComicViewProtocol
-extension ViewController: ComicViewProtocol {
+extension MainViewController: ComicViewProtocol {
     func success() {
         collectionView.reloadData()
     }
@@ -74,7 +74,7 @@ extension ViewController: ComicViewProtocol {
 }
 
 //MARK: CollectionView
-extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
     }
@@ -98,7 +98,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
 }
 
     //  MARK: - NavigationBarDelegate
-extension ViewController: NavigationBarDelegate {
+extension MainViewController: NavigationBarDelegate {
     func fetchRandomComic() {
         presenter.fetchRandomComic()
     }

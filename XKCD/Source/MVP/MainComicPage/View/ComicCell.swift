@@ -54,7 +54,7 @@ class ComicCell: UICollectionViewCell {
         titleLabel.centerX(inView: self)
         titleLabel.anchor(top: topAnchor)
         titleLabel.setWidth(width: self.widthAnchor)
-        imageVw.anchor(top: titleLabel.bottomAnchor)
-        imageVw.centerX(inView: self)
+        imageVw.anchor(top: titleLabel.bottomAnchor,
+                       bottom: bottomAnchor)
     }
 }

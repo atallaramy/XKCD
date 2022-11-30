@@ -15,7 +15,7 @@ protocol AssemblyBuilderProtocol {
 
 class AssemblyBuilder: AssemblyBuilderProtocol {
     func createComicModule(router: RouterProtocol) -> UIViewController {
-        let view = ViewController()
+        let view = MainViewController()
         let networkService = NetworkManager()
         let presenter = ComicPresenter(view: view, networkService: networkService, router: router)
         view.presenter = presenter
